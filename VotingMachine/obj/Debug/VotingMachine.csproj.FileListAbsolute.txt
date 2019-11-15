@@ -1,0 +1,10 @@
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\bin\Debug\VotingMachine.exe.config
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\bin\Debug\VotingMachine.exe
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\bin\Debug\VotingMachine.pdb
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.csprojAssemblyReference.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.Form1.resources
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.Properties.Resources.resources
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.csproj.GenerateResource.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.csproj.CoreCompileInputs.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.exe
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\VotingMachine\obj\Debug\VotingMachine.pdb
