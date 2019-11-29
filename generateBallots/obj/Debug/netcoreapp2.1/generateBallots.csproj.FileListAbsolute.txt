@@ -1,0 +1,11 @@
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\bin\Debug\netcoreapp2.1\generateBallots.deps.json
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\bin\Debug\netcoreapp2.1\generateBallots.runtimeconfig.json
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\bin\Debug\netcoreapp2.1\generateBallots.runtimeconfig.dev.json
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\bin\Debug\netcoreapp2.1\generateBallots.dll
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\bin\Debug\netcoreapp2.1\generateBallots.pdb
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.csprojAssemblyReference.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.csproj.CoreCompileInputs.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.AssemblyInfoInputs.cache
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.AssemblyInfo.cs
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.dll
+C:\Users\trip9\Google Drive\DSU\CSC\CSC 410 Parallel Computing\VotingMachine\generateBallots\obj\Debug\netcoreapp2.1\generateBallots.pdb

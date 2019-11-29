@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\trip9\\Google Drive\\DSU\\CSC\\CSC 410 Parallel Computing\\VotingMachine\\generateBallots\\generateBallots.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\trip9\\Google Drive\\DSU\\CSC\\CSC 410 Parallel Computing\\VotingMachine\\generateBallots\\generateBallots.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\trip9\\Google Drive\\DSU\\CSC\\CSC 410 Parallel Computing\\VotingMachine\\generateBallots\\generateBallots.csproj",
+        "projectName": "generateBallots",
+        "projectPath": "C:\\Users\\trip9\\Google Drive\\DSU\\CSC\\CSC 410 Parallel Computing\\VotingMachine\\generateBallots\\generateBallots.csproj",
+        "packagesPath": "C:\\Users\\trip9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\trip9\\Google Drive\\DSU\\CSC\\CSC 410 Parallel Computing\\VotingMachine\\generateBallots\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\trip9\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
