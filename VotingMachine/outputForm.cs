@@ -42,8 +42,18 @@ namespace VotingMachine
 
         private void goButtonClick(object sender, EventArgs e)
         {
-            State currentState = states[statesDropdown.SelectedIndex - 1];
-
+            int numStates;
+            int state = statesDropdown.SelectedIndex ;
+            if (statesDropdown.SelectedIndex > 0)
+            {
+                numStates = 1;
+                state--;
+            }
+            else
+            {
+                numStates = 50;
+            }
+   
             resultsBox.Items.Clear();
             resultsBox.Columns.Clear();
 
@@ -72,9 +82,11 @@ namespace VotingMachine
                         votesByGender[ballot.candidateVote - 1, 1]++;
                 };
 
-                var tasks = Enumerable.Range(0, currentState.ballots.Count)
-                                      .Select(x => Task.Factory.StartNew(()=>calcVotesByGender(currentState.ballots[x])))
-                                      .ToArray();
+                var tasks = (from y in Enumerable.Range(state, numStates)
+                             from x in Enumerable.Range(0, states[y].ballots.Count)
+                             select Task.Factory.StartNew(() => calcVotesByGender(states[y].ballots[x]))).ToArray();
+
+               
                 Task.WaitAll(tasks);
 
                 for(var i = 0; i < Ballot.numberOfCandidates; i++)
@@ -111,9 +123,10 @@ namespace VotingMachine
                         votesByParty[ballot.candidateVote - 1, 2]++;
                 };
 
-                var tasks = Enumerable.Range(0, currentState.ballots.Count)
-                                      .Select(x => Task.Factory.StartNew(() => calcVotesByGender(currentState.ballots[x])))
-                                      .ToArray();
+                var tasks = (from y in Enumerable.Range(state, numStates)
+                     from x in Enumerable.Range(0, states[y].ballots.Count)
+                     select Task.Factory.StartNew(() => calcVotesByGender(states[y].ballots[x]))).ToArray();
+                
                 Task.WaitAll(tasks);
 
                 for (var i = 0; i < Ballot.numberOfCandidates; i++)
