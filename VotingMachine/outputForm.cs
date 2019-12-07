@@ -88,15 +88,22 @@ namespace VotingMachine
 
                
                 Task.WaitAll(tasks);
-
+                var totals = new int[2];
                 for(var i = 0; i < Ballot.numberOfCandidates; i++)
                 {
                     resultsBox.Items.Add(new ListViewItem(new string[] {"Candidate " + (i + 1), votesByGender[i, 0].ToString(), votesByGender[i, 1].ToString(), (votesByGender[i,0]+votesByGender[i,1]).ToString() }));
+                    totals[0] += votesByGender[i, 0];
+                    totals[1] += votesByGender[i, 1];
+                    resultsBox.Items[i].UseItemStyleForSubItems = false;
+                    resultsBox.Items[i].SubItems[3].BackColor = Color.LightGray;
                 }
+                resultsBox.Items.Add(new ListViewItem(new string[] { "Totals:", totals[0].ToString(), totals[1].ToString(), (totals[0] + totals[1]).ToString() }));
                 resultsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 resultsBox.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 resultsBox.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 resultsBox.Columns[3].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                resultsBox.Items[resultsBox.Items.Count - 1].BackColor = Color.LightGray;
+
             }
             else if (sortByBox.SelectedItem.ToString() == "Party")
             {
@@ -129,17 +136,25 @@ namespace VotingMachine
                 
                 Task.WaitAll(tasks);
 
+                var totals = new int[3];
                 for (var i = 0; i < Ballot.numberOfCandidates; i++)
                 {
                     resultsBox.Items.Add(new ListViewItem(new string[] { "Candidate " + (i + 1), votesByParty[i, 0].ToString(), votesByParty[i, 1].ToString(), votesByParty[i,2].ToString(),(votesByParty[i, 0] + votesByParty[i, 1] + votesByParty[i,2]).ToString() }));
+                    totals[0] += votesByParty[i, 0];
+                    totals[1] += votesByParty[i, 1];
+                    totals[2] += votesByParty[i, 2];
+                    resultsBox.Items[i].UseItemStyleForSubItems = false;
+                    resultsBox.Items[i].SubItems[4].BackColor = Color.LightGray;
                 }
+                
+                resultsBox.Items.Add(new ListViewItem(new string[] { "Totals:", totals[0].ToString(), totals[1].ToString(), totals[2].ToString(), (totals[0]+totals[1]+totals[2]).ToString()}));
                 resultsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                 resultsBox.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 resultsBox.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 resultsBox.Columns[3].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
                 resultsBox.Columns[4].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                resultsBox.Items[resultsBox.Items.Count - 1].BackColor = Color.LightGray;
             }
-
         }
     }
 }
