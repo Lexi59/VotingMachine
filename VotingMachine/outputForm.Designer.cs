@@ -92,7 +92,7 @@
             this.Controls.Add(this.statesDropdown);
             this.Controls.Add(this.label1);
             this.Name = "outputForm";
-            this.Text = "Form1";
+            this.Text = "Election Results";
             this.ResumeLayout(false);
             this.PerformLayout();
 
