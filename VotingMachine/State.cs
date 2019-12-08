@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,12 @@ namespace VotingMachine
     class State
     {
         public string stateAbbrv;
-        public List<Ballot> ballots;
+        public ConcurrentQueue<Ballot> ballots;
 
         public State (string abbr)
         {
             stateAbbrv = abbr;
-            ballots = new List<Ballot>();
+            ballots = new ConcurrentQueue<Ballot>();
         }
     }
 }

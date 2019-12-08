@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +16,7 @@ namespace VotingMachine
             InitializeComponent();
             states = new List<State>();
             List<string> stateAbbreviations = new List<string> { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
-            statesDropdown.Items.Add("Overalll");
+            statesDropdown.Items.Add("Overall");
             foreach(string state in stateAbbreviations)
             {
                 statesDropdown.Items.Add(state);
@@ -28,32 +26,32 @@ namespace VotingMachine
             sortByBox.Items.Add("Party");
 
             List<string> lines = System.IO.File.ReadAllLines(@"..\..\Resources\ballots.txt").ToList<string>();
+
+           /* foreach (String line in lines)
+                     foreach(State state in states)
+                         if (line.Split(' ')[3] == state.stateAbbrv)
+                         {
+                             state.ballots.Enqueue(new Ballot(line));
+                             break;
+                         }          
+                                                                                                       */
             Parallel.ForEach(lines, line =>
             {
-                Parallel.ForEach(states, state =>
+                foreach(State state in states)
                 {
                     if (line.Split(' ')[3] == state.stateAbbrv)
                     {
-                        state.ballots.Add(new Ballot(line));
+                        state.ballots.Enqueue(new Ballot(line));
+                        break;
                     }
-                });
-            });
+                }
+            });                                                                                                    
         }
 
         private void goButtonClick(object sender, EventArgs e)
         {
-            int numStates;
             int state = statesDropdown.SelectedIndex ;
-            if (statesDropdown.SelectedIndex > 0)
-            {
-                numStates = 1;
-                state--;
-            }
-            else
-            {
-                numStates = 50;
-            }
-   
+
             resultsBox.Items.Clear();
             resultsBox.Columns.Clear();
 
@@ -77,17 +75,55 @@ namespace VotingMachine
 
                 Action<Ballot> calcVotesByGender = (ballot) => {
                     if (ballot.male)
-                        votesByGender[ballot.candidateVote - 1, 0]++;
+                        Interlocked.Increment(ref votesByGender[ballot.candidateVote - 1, 0]);
                     else
-                        votesByGender[ballot.candidateVote - 1, 1]++;
+                        Interlocked.Increment(ref votesByGender[ballot.candidateVote - 1, 1]);
                 };
 
-                var tasks = (from y in Enumerable.Range(state, numStates)
-                             from x in Enumerable.Range(0, states[y].ballots.Count)
-                             select Task.Factory.StartNew(() => calcVotesByGender(states[y].ballots[x]))).ToArray();
+                                                                                                             
+                                                                                                           /* 
+                //sequential version of counting votes by gender
+                if (state == 0)
+                {
+                    for (int s = 0; s < 50; s++)
+                    {
+                        List<Ballot> stateBallots = states[s].ballots.ToList();
+                        for (int x = 0; x < stateBallots.Count; x++)
+                            calcVotesByGender(stateBallots[x]);
+                    }
+                }
+                else
+                {
+                    state--;
+                    List<Ballot> stateBallots = states[state].ballots.ToList();
+                    for (int x = 0; x < stateBallots.Count; x++)
+                        calcVotesByGender(stateBallots[x]);
+                }
+                        
+                                                                                                          */
 
-               
-                Task.WaitAll(tasks);
+                //parallel version of counting votes by gender  
+                if (state == 0)
+                {
+                    Parallel.For(0, 50, s =>
+                    {
+                        List<Ballot> stateBallots = states[s].ballots.ToList();
+                        Parallel.For(0, stateBallots.Count, x =>
+                        {
+                            calcVotesByGender(stateBallots[x]);
+                        });
+                    });
+                }
+                else
+                {
+                    state--;
+                    List<Ballot> stateBallots = states[state].ballots.ToList();
+                    Parallel.For(0, stateBallots.Count, x =>
+                    {
+                        calcVotesByGender(stateBallots[x]);
+                    });
+                }
+
                 var totals = new int[2];
                 for(var i = 0; i < Ballot.numberOfCandidates; i++)
                 {
@@ -121,21 +157,57 @@ namespace VotingMachine
                     votesByParty[i, 2] = 0;
                 }
 
-                Action<Ballot> calcVotesByGender = (ballot) => {
+                Action<Ballot> calcVotesByParty = (ballot) => {
                     if (ballot.democrat)
-                        votesByParty[ballot.candidateVote - 1, 0]++;
+                        Interlocked.Increment(ref votesByParty[ballot.candidateVote - 1, 0]);
                     else if (ballot.republican)
-                        votesByParty[ballot.candidateVote - 1, 1]++;
+                        Interlocked.Increment(ref votesByParty[ballot.candidateVote - 1, 1]);
                     else
-                        votesByParty[ballot.candidateVote - 1, 2]++;
+                        Interlocked.Increment(ref votesByParty[ballot.candidateVote - 1, 2]);
                 };
+                                                                                                                        
+                                                                                                                            /*
+                //sequential version of counting votes by party                                                         
+                if (state == 0)
+                   {
+                       for (int s = 0; s < 50; s++)
+                       {
+                           List<Ballot> stateBallots = states[s].ballots.ToList();
+                           for (int x = 0; x < stateBallots.Count; x++)
+                               calcVotesByParty(stateBallots[x]);
+                       }
+                   }
+                   else
+                   {
+                       state--;
+                       List<Ballot> stateBallots = states[state].ballots.ToList();
+                       for (int x = 0; x < stateBallots.Count; x++)
+                           calcVotesByParty(stateBallots[x]);
+                   }
+                                                                                                                          */                                                                                       
 
-                var tasks = (from y in Enumerable.Range(state, numStates)
-                     from x in Enumerable.Range(0, states[y].ballots.Count)
-                     select Task.Factory.StartNew(() => calcVotesByGender(states[y].ballots[x]))).ToArray();
-                
-                Task.WaitAll(tasks);
-
+                //parallel version of counting votes by party  
+                if (state == 0)
+                {
+                    Parallel.For(0, 50, s =>
+                    { 
+                        List<Ballot> stateBallots = states[s].ballots.ToList();
+                        Parallel.For(0, stateBallots.Count, x =>
+                        {
+                            calcVotesByParty(stateBallots[x]);
+                        });
+                    });
+                }
+                else
+                {
+                    state--;
+                    List<Ballot> stateBallots = states[state].ballots.ToList();
+                    Parallel.For(0, stateBallots.Count, x =>
+                    {
+                        calcVotesByParty(stateBallots[x]);
+                    });
+                }
+              
                 var totals = new int[3];
                 for (var i = 0; i < Ballot.numberOfCandidates; i++)
                 {
