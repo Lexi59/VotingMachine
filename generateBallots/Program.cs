@@ -9,8 +9,8 @@ namespace generateBallots
         {
             //Id Party Gender State v v v v v v v
 
-            string[] lines = new string[25];
-            int numberOfVoters = 25;
+            string[] lines = new string[50000];
+            int numberOfVoters = 50000;
             int numberOfCandidates = 7;
             List<string> stateAbbreviations = new List<string> { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
             for (int i = 0; i < numberOfVoters; i++)
